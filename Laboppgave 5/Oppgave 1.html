@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polygon</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script type="text/javascript">
+
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let Position = {x: 0, y: 0};
+    let posX = [];
+    let posY = [];
+    let rectX = [];
+    let rectY = [];
+
+    let count = 0;
+
+    c.addEventListener("mouseup", function (e) {
+        Position.x = e.clientX-c.offsetLeft;
+        Position.y = e.clientY-c.offsetTop;
+        posX.push(Position.x);
+        posY.push(Position.y);
+        rectX.push(Position.x);
+        rectY.push(Position.y);
+
+
+        drawPolygon();
+
+
+    });
+
+    function drawPolygon() {
+        ctx.clearRect(0, 0, c.height, c.width);
+        ctx.beginPath();
+        count++;
+
+        for (let i = 0; i < posX.length; i++) {
+            if (posX.length === 1) {
+                ctx.moveTo(posX[0], posY[0]);
+            } else {
+                ctx.lineTo(posX[i], posY[i]);
+            }
+        }
+        ctx.fillText("x = " + Position.x + ", y = " + Position.y, 520, 590);
+        if (count != 2) {
+            ctx.closePath();
+            console.log(count);
+        }
+        ctx.stroke();
+
+        for (let f = 0; f < posX.length; f++) {
+            ctx.beginPath();
+            ctx.rect(rectX[f] - 5, rectY[f] - 5, 10, 10);
+            ctx.stroke();
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>
