@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 3</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let newX=[];
+    let newY=[];
+    let a=b=400;
+    let center = 400;
+    let i=0;
+    let v=0;
+    let antall = 4;
+    let vinkelsteg;
+
+  //  drawPolygon();
+
+  /*  function drawPolygon() {
+        vinkelsteg = 2*Math.PI/antall;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.beginPath();
+        do {
+            let x = a * Math.cos(v);
+            let y = b * Math.sin(v);
+            newX.push(x);
+            newY.push(y);
+            ctx.lineTo(newX[i] + center, newY[i] + center);
+            v += vinkelsteg;
+            i++;
+        } while (v < 2 * Math.PI);
+        ctx.closePath();
+        ctx.stroke();
+       // drawLines();
+    }
+    */
+
+  /*  function drawLines(){
+        console.log("x: "+ Math.ceil(newX[0]) + ", y: " + Math.ceil(newY[0]));
+        ctx.beginPath();
+        ctx.lineTo((newX[0]*0.9)+center,(newY[0]*0.9)+center);
+        ctx.lineTo(newX[1]*vinkelsteg + center, newY[1]*vinkelsteg + center);
+        ctx.lineTo(newX[2]*vinkelsteg + center, newY[2]*vinkelsteg + center);
+        ctx.stroke();
+    }
+
+   */
+
+  let posA={x:0,y:0};
+  let posB={x:0,y:800};
+  let posC={x:800,y:800};
+  let posD={x:800,y:0};
+  console.log(posA);
+
+  ctx.beginPath();
+  ctx.moveTo(posA.x,posA.y + (0.1*posB.y));
+  ctx.lineTo(posB.x + (0.1*posB.y),posB.y);
+  ctx.lineTo(posC.x, posC.y - (0.1*posC.x));
+  ctx.lineTo(posD.x - (0.1*posD.x), posD.y);
+  ctx.closePath();
+  ctx.stroke();
+
+    posA={x:posA.x+9, y:posA.y+(0.1*posB.y*2)};
+    posB={x:posB.x+(0.1*posB.y*2),y:posB.y-9};
+    posC={x:posC.x-9,y:posC.y-(0.1*posC.x*2)};
+    posD={x:posD.x-(0.1*posD.x*2),y:posD.y+9};
+
+  ctx.beginPath();
+    ctx.moveTo(posA.x,posA.y);
+    ctx.lineTo(posB.x,posB.y);
+    ctx.lineTo(posC.x,posC.y);
+    ctx.lineTo(posD.x,posD.y);
+    ctx.closePath();
+    ctx.stroke();
+
+    posA={x:posA.x+19, y:posA.y+(0.1*posB.y)};
+    posB={x:posB.x+(0.1*posB.y),y:posB.y-19};
+    posC={x:posC.x-19,y:posC.y-(0.1*posC.x)};
+    posD={x:posD.x-(0.1*posD.x),y:posD.y+16};
+
+    ctx.beginPath();
+    ctx.moveTo(posA.x,posA.y);
+    ctx.lineTo(posB.x,posB.y);
+    ctx.lineTo(posC.x,posC.y);
+    ctx.lineTo(posD.x,posD.y);
+    ctx.closePath();
+    ctx.stroke();
+
+    posA={x:posA.x+31, y:posA.y+(0.1*posB.y)};
+    posB={x:posB.x+(0.1*posB.y),y:posB.y-31};
+    posC={x:posC.x-28,y:posC.y-(0.1*posC.x)};
+    posD={x:posD.x-(0.1*posD.x),y:posD.y+22};
+
+    ctx.beginPath();
+    ctx.moveTo(posA.x,posA.y);
+    ctx.lineTo(posB.x,posB.y);
+    ctx.lineTo(posC.x,posC.y);
+    ctx.lineTo(posD.x,posD.y);
+    ctx.closePath();
+    ctx.stroke();
+
+    posA={x:posA.x+45, y:posA.y+(0.1*posB.y)};
+    posB={x:posB.x+(0.1*posB.y),y:posB.y-45};
+    posC={x:posC.x-39,y:posC.y-(0.1*posC.x)};
+    posD={x:posD.x-(0.1*posD.x),y:posD.y+30};
+
+    ctx.beginPath();
+    ctx.moveTo(posA.x,posA.y);
+    ctx.lineTo(posB.x,posB.y);
+    ctx.lineTo(posC.x,posC.y);
+    ctx.lineTo(posD.x,posD.y);
+    ctx.closePath();
+    ctx.stroke();
+
+    posA={x:posA.x+66, y:posA.y+(0.1*posB.y)};
+    posB={x:posB.x+(0.1*posB.y),y:posB.y-64};
+    posC={x:posC.x-51,y:posC.y-(0.1*posC.x)};
+    posD={x:posD.x-(0.1*posD.x),y:posD.y+41};
+
+    ctx.beginPath();
+    ctx.moveTo(posA.x,posA.y);
+    ctx.lineTo(posB.x,posB.y);
+    ctx.lineTo(posC.x,posC.y);
+    ctx.lineTo(posD.x,posD.y);
+    ctx.closePath();
+    ctx.stroke();
+
+
+
+</script>
+</body>
+</html>
