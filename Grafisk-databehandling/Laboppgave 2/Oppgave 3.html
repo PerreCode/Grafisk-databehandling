@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 3</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let pointArrX = [];
+    let pointArrY = [];
+    let rep=30;
+    let p = 0.9;
+    let squares = 8;
+    let squareEnd = 200;
+    let squareStart = 0;
+    let x1=squareStart,x2=squareStart,x3=squareEnd,x4=squareEnd,y1=squareStart,y2=squareEnd,y3=squareEnd,y4=squareStart;
+    pointArrX.push(x1,x2,x3,x4);
+    pointArrY.push(y1,y2,y3,y4);
+    generate();
+
+
+    function rotateBox() {
+        let startPointX = pointArrX[0];
+        let startPointY = pointArrY[0];
+        for (let i = 0; i < pointArrX.length; i++) {
+            let x, y;
+            if (i === (pointArrX.length - 1)) {
+                x = (1 - p) * pointArrX[i] + p * startPointX;
+                y = (1 - p) * pointArrY[i] + p * startPointY;
+            } else {
+                x = (1 - p) * pointArrX[i] + p * pointArrX[i + 1];
+                y = (1 - p) * pointArrY[i] + p * pointArrY[i + 1];
+            }
+            pointArrX[i] = x;
+            pointArrY[i] = y;
+        }
+    }
+
+    function draw(){
+        ctx.beginPath();
+        ctx.moveTo(pointArrX[0], pointArrY[0]);
+        for(let i=0; i < pointArrX.length; i++){
+            if(i===(pointArrX.length-1)){
+                ctx.lineTo(pointArrX[0], pointArrY[0]);
+            }else{
+                ctx.lineTo(pointArrX[i+1], pointArrY[i+1]);}
+        }
+        ctx.stroke();
+    }
+
+    function generate(){
+      //  ctx.clearRect(0,0,c.height,c.width);
+            for (let i = 0; i < rep; i++) {
+                draw();
+                rotateBox();
+        }
+
+    }
+
+    function multipleSquares(){
+        for (let i=0;i<squares;i++){
+
+        }
+    }
+
+</script>
+</body>
+</html>

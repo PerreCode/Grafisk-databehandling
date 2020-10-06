@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 2</title>
+</head>
+<body>
+
+
+<canvas id="myCanvas" width="800" height="800" style="background-color:yellow; border:1px solid;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let newX=[];
+    let newY=[];
+    let a=b=350;
+    let center = 400;
+    let i=0;
+    let v=0;
+    let vinkelsteg;
+
+    let antall = 4;
+
+  /*  drawPolygon();
+    function drawPolygon() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        vinkelsteg = 2*Math.PI/40;
+        ctx.beginPath();
+        do {
+            let x = a * Math.cos(v);
+            let y = b * Math.sin(v);
+            newX.push(x);
+            newY.push(y);
+            ctx.lineTo(newX[i] + center, newY[i] + center);
+            v += vinkelsteg;
+            i++;
+        } while (v < 2 * Math.PI);
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+   */
+
+  drawLines();
+
+    function drawLines(){
+        let start=800;
+        let r=0.1;
+        let test=1;
+        let square={};
+        square.a={x:start,y:start};
+        square.b={x:start,y:0};
+        square.c={x:0,y:0};
+        square.d={x:0,y:start};
+
+        ctx.beginPath();
+
+        for(let i=0;i<4; i++) {
+
+            ctx.lineTo(square.b.x - (square.b.x - square.c.x) * r, square.b.y);
+            ctx.lineTo(square.c.x, square.c.y + (square.d.y - square.c.y) * r);
+            ctx.lineTo(square.d.x + ((square.a.x - square.d.x) * r), square.d.y);
+            ctx.lineTo(square.a.x, square.a.y - (square.a.y - square.b.y) * r);
+            ctx.lineTo(square.b.x - (square.b.x - square.c.x) * r, square.b.y);
+
+
+
+            r+=0.1;
+          /*  start = start*0.9;
+            square.a.x+=-9;
+            square.b.x+=5;
+            square.c.x+=5;
+            square.d.x+=5;
+            square.b.y+=5;
+            square.c.y+=5;
+            square.d.y+=5;
+            square.d.y+=5;
+
+           */
+
+            console.log(square.d.y)
+
+        }
+
+    ctx.stroke();
+    }
+
+
+
+</script>
+</body>
+</html>

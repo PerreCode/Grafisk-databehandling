@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hus</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="600" height="600"  style="border:1px solid #d3d3d3; vertical-align: middle; background-color: #66ccff;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    const drawingSkies = {
+        P1: {x:50, y:150},
+        P2: {x:200, y:120},
+        P3: {x:400, y:200},
+        P4: {x:550, y:150}
+    };
+
+    //Lines for the skies
+    ctx.beginPath();
+    ctx.moveTo(drawingSkies.P1.x,drawingSkies.P1.y);
+    ctx.lineTo(drawingSkies.P2.x,drawingSkies.P2.y);
+    ctx.lineTo(drawingSkies.P3.x,drawingSkies.P3.y);
+    ctx.lineTo(drawingSkies.P4.x,drawingSkies.P4.y);
+    ctx.stroke();
+
+    //The sun
+    ctx.beginPath();
+    ctx.arc(400, 75, 40, 0, 2 * Math.PI);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.stroke();
+
+    //The house
+
+    //Wall and Roof
+    ctx.beginPath();
+    ctx.rect(150, 350, 300, 250);
+    ctx.fillStyle = "Red";
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(100,380);
+    ctx.lineTo(150,300);
+    ctx.lineTo(450,300);
+    ctx.lineTo(500,380);
+    ctx.closePath();
+    ctx.fillStyle = "black";
+    ctx.fill();
+
+    //Windows
+    ctx.beginPath();
+    ctx.rect(220, 400, 50, 50);
+    ctx.fillStyle = "#7f7f7f";
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.rect(330, 400, 50, 50);
+    ctx.fillStyle = "#7f7f7f";
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(330,425);
+    ctx.lineTo(380,425);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(220,425);
+    ctx.lineTo(270,425);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(355,450);
+    ctx.lineTo(355,400);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(245,450);
+    ctx.lineTo(245,400);
+    ctx.stroke();
+
+    //Door
+    ctx.beginPath();
+    ctx.rect(200, 510, 50, 90);
+    ctx.fillStyle = "#7f7f7f";
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(210, 550, 5, 3, 2 * Math.PI);
+    ctx.fillStyle = "black";
+    ctx.fill();
+    ctx.stroke();
+
+
+</script>
+</body>
+</html>

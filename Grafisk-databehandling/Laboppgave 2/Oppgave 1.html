@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 1</title>
+    <style>
+        .slider {
+            -webkit-appearance: none;
+            width: 10%;
+            height: 25px;
+            background: #d3f3d3;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="slidecontainer">
+
+    <label>Antall hjørner:</label>
+    <input onmousemove="sliderValue()" type="range" min="2" max="20" value="8" class="slider" id="myRange">
+    <label> Radius:</label>
+    <input onmousemove="sliderValue()" type="range" min="30" max="400" value="400" class="slider" id="myRadius">
+</div>
+<canvas id="myCanvas" width="800" height="800" style="background-color:yellow; border:1px solid;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let newX=[];
+    let newY=[];
+    let a=b=400;
+    let i=0;
+    let v=0;
+    let antall = 8;
+    let vinkelsteg;
+
+    let slider = document.getElementById("myRange");
+    let radius = document.getElementById("myRadius");
+    ctx.font="20px Verdana";
+
+    drawPolygon();
+    updateValues();
+
+    function drawPolygon() {
+        vinkelsteg = 2*Math.PI/antall;
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.beginPath();
+        do {
+            let x = a * Math.cos(v);
+            let y = b * Math.sin(v);
+            newX.push(x);
+            newY.push(y);
+            ctx.lineTo(newX[i] + 400, newY[i] + 400);
+            v += vinkelsteg;
+            i++;
+        } while (v < 2 * Math.PI);
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+        function sliderValue() {
+            a = b = radius.value;
+            antall = slider.value;
+            v = 0;
+            drawPolygon();
+            updateValues();
+        }
+
+        function updateValues(){
+            ctx.fillText("Radius: " + radius.value + " px", 10,60);
+            ctx.fillText("Antall hjørner: " + slider.value, 10,30);
+        }
+
+</script>
+</body>
+</html>

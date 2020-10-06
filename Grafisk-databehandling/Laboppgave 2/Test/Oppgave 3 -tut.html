@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 3</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let newX=[];
+    let newY=[];
+    let a=b=400;
+    let center = 400;
+    let i=0;
+    let v=0;
+    let antall = 4;
+    let vinkelsteg;
+/*
+      drawPolygon();
+
+      function drawPolygon() {
+          ctx.clearRect(0, 0, c.width, c.height);
+          ctx.beginPath();
+
+
+              vinkelsteg = 2 * Math.PI / antall;
+
+              do {
+                  let x = a * Math.cos(v);
+                  let y = b * Math.sin(v);
+                  newX.push(x);
+                  newY.push(y);
+                  ctx.lineTo(newX[i] + center, newY[i] + center);
+                  v += vinkelsteg;
+                  i++;
+              } while (v < 2 * Math.PI);
+              ctx.closePath();
+              ctx.stroke();
+              // drawLines();
+          }
+
+ */
+        drawSquares();
+
+          function drawSquares(){
+              let rotationPos = 1.1;
+              let rotationNeg = 0.9;
+              let sC={};
+              sC.a={x:0,y:0};
+              sC.b={x:0,y:c.height};
+              sC.c={x:c.width,y:c.height};
+              sC.d={x:c.width,y:0};
+              ctx.clearRect(0, 0, c.width, c.height);
+              ctx.beginPath();
+
+              ctx.lineTo(sC.a.x, sC.a.y+(sC.b.y*0.1));
+              ctx.lineTo(sC.b.x+(sC.b.y*0.1), sC.b.y);
+              ctx.lineTo(sC.c.x, sC.c.y*rotationNeg);
+              ctx.lineTo(sC.d.x*rotationNeg, sC.d.y);
+              for(let i=0; i<5; i++) {
+
+                  sC.a={x:sC.a.x,y:sC.a.y+(sC.b.y*0.1)};
+                  sC.b={x:sC.b.x+(sC.b.y*0.1),y:sC.b.y};
+                  sC.c={x:sC.c.x,y:sC.c.y*rotationNeg};
+                  sC.d={x:sC.d.x*rotationNeg,y:sC.d.y};
+
+
+                  ctx.lineTo(sC.a.x, sC.a.y+(sC.b.y*0.1));
+                  ctx.lineTo(sC.b.x+(sC.b.y*0.1), sC.b.y);
+                  ctx.lineTo(sC.c.x*rotationPos, sC.c.y*rotationNeg);
+                  ctx.lineTo(sC.d.x*rotationNeg, sC.d.y*rotationPos);
+
+                //  ctx.closePath();
+              }
+
+              ctx.stroke();
+
+
+
+          }
+
+
+
+
+</script>
+</body>
+</html>

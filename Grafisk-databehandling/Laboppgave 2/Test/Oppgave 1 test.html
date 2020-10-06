@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 1</title>
+
+
+</head>
+<body>
+<form onchange="sliderValue()">
+    <label for="antall">antall punkter</label>
+    <select id="antall">
+    <option>4</option>
+    <option>4</option>
+    <option>4</option>
+    <option>4</option>
+    <option>4</option>
+    </select>
+    <label for="antall">antall punkter</label>
+    <select id="antall">
+        <option>4</option>
+        <option>4</option>
+        <option>4</option>
+        <option>4</option>
+        <option>4</option>
+    </select>
+</form>
+<canvas id="myCanvas" width="800" height="800" style="background-color:yellow; border:1px solid;">
+</canvas>
+<div class="slidecontainer">
+
+    <p>Custom range slider:</p>
+    <input type="range" min="2" max="20" value="8" class="slider" id="myRange">
+</div>
+
+<script type="text/javascript">
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+
+  /*  let k = 16;
+    let center = 400;
+    let v=0;
+
+    function draw(){
+
+        for(let r = 0; r < Math.PI*10; r+=0.032){
+            let a = 300 * Math.cos(k*r);
+            let x = a*Math.cos(r);
+            let y = r*Math.sin(r);
+            ctx.beginPath();
+            ctx.moveTo(center,center);
+            ctx.lineTo(x+center,y+center);
+            ctx.stroke();
+        }
+    }
+    draw();*/
+
+    k = 50/9;
+    ctx.beginPath();
+    for (let a = 0; a < 10 * 6.2831855; a += 0.5) {
+        let r = 300 * Math.sin(k * a);
+        let x = r * Math.cos(a);
+        let y = r * Math.sin(a);
+        ctx.moveTo(400, 400);
+        ctx.lineTo(x+400,y+400);
+        ctx.stroke()
+    }
+    ctx.closePath();
+
+ // x = a*cos(v); og y = b*sin(v); for 0<=v<=2*Pi
+
+
+</script>
+</body>
+</html>
