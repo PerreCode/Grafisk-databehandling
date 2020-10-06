@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strikk</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    w = canvas.width;
+    h = canvas.height;
+    var ctx = canvas.getContext("2d");
+
+    var x = [100, 250, 400];
+    var y = [250, 250, 250];
+
+    var aktiv = false;
+
+    // For å tegne opp rammen og strikken i utgangsposisjonen
+    draw();
+
+/*    canvas.addEventListener("mousedown", function (e) {
+        var currx = e.clientX - canvas.offsetLeft; // Alternativt: var currx = e.layerX; (ikke støttet i alle browsere)
+        var curry = e.clientY - canvas.offsetTop;  // Alternativt: var curry = e.layerY; (ikke støttet i alle browsere)
+        if (Math.sqrt((x[1] - currx) * (x[1] - currx) + (y[1] - curry) * (y[1] - curry)) <= 10) {
+            aktiv = true;
+        }
+    }, false);*/
+
+    canvas.addEventListener("mousedown", mouseDown,false);
+
+
+    function mouseDown(e){
+        var currx = e.clientX - canvas.offsetLeft; // Alternativt: var currx = e.layerX; (ikke støttet i alle browsere)
+        var curry = e.clientY - canvas.offsetTop;  // Alternativt: var curry = e.layerY; (ikke støttet i alle browsere)
+        if (Math.sqrt((x[1] - currx) * (x[1] - currx) + (y[1] - curry) * (y[1] - curry)) <= 10) {
+            aktiv = true;
+        }
+    }
+
+    canvas.addEventListener("mouseup", function (e) {
+        aktiv = false;
+        x[1] = 250;
+        y[1] = 250;
+        draw();
+    }, false);
+
+    canvas.addEventListener("mousemove", function (e) {
+        if (aktiv) {
+            x[1] = e.clientX - canvas.offsetLeft;
+            y[1] = e.clientY - canvas.offsetTop;
+            draw();
+            console.log(x[1], y[1]);
+        }
+        else {
+            var currx = e.clientX - canvas.offsetLeft;
+            var curry = e.clientY - canvas.offsetTop;
+            if (Math.sqrt((x[1] - currx) * (x[1] - currx) + (y[1] - curry) * (y[1] - curry)) <= 10)
+                document.getElementById("myCanvas").style.cursor = "pointer";
+            else document.getElementById("myCanvas").style.cursor = "auto";
+        }
+    }, false);
+
+    canvas.addEventListener('keydown', function (event) {
+        if (event.keyCode == 37) {
+            alert('Left was pressed');
+        }
+
+    }, false);
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "yellow";
+        ctx.fillStyle = "rgb(255,255,0)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "red";
+        ctx.fillRect(100, 100, 300, 300);
+
+        ctx.beginPath();
+        ctx.moveTo(x[0], y[0]);
+        ctx.lineTo(x[1], y[1]);
+        ctx.lineTo(x[2], y[2]);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(x[1], y[1], 5, 0, 2 * Math.PI);
+        ctx.stroke();
+
+    }
+
+    //Dersom vi ville at funksjonen draw skulle tegnes opp med jevne mellomrom (animasjon)
+    //var myVar = setInterval(draw,10);
+</script>
+</body>
+</html>
