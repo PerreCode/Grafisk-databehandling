@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    w = canvas.width;
+    h = canvas.height;
+    var ctx = canvas.getContext("2d");
+
+    var squares = [];
+    var nsquares = 0;
+    var SQUARELENGTH = 10;
+
+    var aktiv = false;
+    var current = -1;  //Number pointing to current rectangel in the table
+
+    function Point(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    canvas.addEventListener("mousedown", function (e) {
+        var x = e.clientX - canvas.offsetLeft; // Alternative: var currx = e.layerX; (ikke støttet i alle browsere)
+        var y = e.clientY - canvas.offsetTop;  // Alternative: var curry = e.layerY; (ikke støttet i alle browsere)
+        current = find(x, y);
+        if (current < 0) //not inside a square
+            add(x, y);
+        else
+            aktiv = true;
+    }, false);
+
+    canvas.addEventListener("mouseup", function (e) {
+        aktiv = false;
+    }, false);
+
+
+    canvas.addEventListener("mousemove", function (e) {
+        var x = e.clientX - canvas.offsetLeft;
+        var y = e.clientY - canvas.offsetTop;
+
+        if (aktiv) {
+            squares[current].x = x;
+            squares[current].y = y;
+            draw();
+        }
+
+        else {
+            if (find(x, y) >= 0) //inside a square
+                document.getElementById("myCanvas").style.cursor = "pointer";
+            else
+                document.getElementById("myCanvas").style.cursor = "auto";
+        }
+    }, false);
+
+
+    canvas.addEventListener("dblclick", function (e) {
+        var x = e.clientX - canvas.offsetLeft;
+        var y = e.clientY - canvas.offsetTop;
+        current = find(x, y);
+        if (current >= 0) remove(current);
+        console.log("dblclick occured");
+    }, false);
+
+    function find(x, y) {
+        for (var i = 0; i < nsquares; i++)
+            if (squares[i].x - SQUARELENGTH / 2 <= x
+                    && x <= squares[i].x + SQUARELENGTH / 2
+                    && squares[i].y - SQUARELENGTH / 2 <= y
+                    && y <= squares[i].y + SQUARELENGTH / 2)
+                return i;
+        return -1; //Fant ikke noe rektangel i nærheten av muspeker
+    }
+
+
+    function add(x, y) {
+        squares[nsquares] = new Point(x, y);
+        current = nsquares;
+        nsquares++;
+        draw();
+    }
+
+    function remove(n) {
+        if (n < 0 || n >= nsquares)
+            return;
+
+       /* squares[n] = squares[nsquares];
+        if (current == n)
+            current = -1;*/
+
+        //Metodeblokken over er et alternativ til å bruke splice
+
+        squares.splice(n,1);
+        nsquares--;
+        draw();
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "black";
+
+        for (var i = 0; i < nsquares; i++) {
+            ctx.strokeRect(squares[i].x - SQUARELENGTH / 2, squares[i].y - SQUARELENGTH
+                    / 2, SQUARELENGTH, SQUARELENGTH);
+        }
+    }
+
+</script>
+
+</body>
+</html>
+
