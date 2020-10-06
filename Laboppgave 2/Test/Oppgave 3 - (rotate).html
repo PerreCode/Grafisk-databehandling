@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 3</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let newX=[];
+    let newY=[];
+    let a=b=400;
+    let center = 400;
+    let i=0;
+    let v=0;
+    let antall = 4;
+    let vinkelsteg;
+
+    /*  drawPolygon();
+
+      function drawPolygon() {
+        //  let circles={};
+          vinkelsteg = 2*Math.PI/antall;
+          ctx.clearRect(0, 0, c.width, c.height);
+          ctx.beginPath();
+          do {
+              let x = a * Math.cos(v);
+              let y = b * Math.sin(v);
+              newX.push(x);
+              newY.push(y);
+             // circles.i={x:newX[i], y:newY[i]};
+              ctx.lineTo(newX[i] + center, newY[i] + center);
+              v += vinkelsteg;
+              i++;
+          } while (v < 2 * Math.PI);
+          ctx.closePath();
+          ctx.stroke();
+          drawLines();
+      }
+
+
+     */
+drawLines();
+
+
+      function drawLines(){
+        //  ctx.clearRect(0, 0, c.width, c.height);
+
+          let posX=200;
+          let posY=200;
+          let lengthX=400;
+          let lengthY=400;
+          let extention = 2;
+          let test = -15;
+          let testx=-10;
+
+          let circles={};
+          circles.a={x:newX[0],y:newY[0]};
+          circles.b={x:newX[1],y:newY[1]};
+          circles.c={x:newX[2],y:newY[2]};
+          circles.d={x:newX[3],y:newY[3]};
+
+          ctx.rect(200, 200, 400, 400);
+
+
+        for (let i=0; i<5; i++){
+            ctx.rect(posX, posY, lengthX, lengthY);
+            ctx.rotate(-10 * Math.PI / 360);
+            lengthX=lengthX*0.90-testx;
+            lengthY=lengthY*0.90-test;
+            posX=posX-19 -extention;
+            posY=posY+43;
+            extention +=4;
+            test+=5
+
+
+        }
+          ctx.stroke();
+        ctx.closePath();
+      }
+
+
+</script>
+</body>
+</html>
