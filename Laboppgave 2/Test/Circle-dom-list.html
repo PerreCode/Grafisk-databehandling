@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<canvas style="background-color: yellow" id="cvs" width="512" height="512">
+
+
+</canvas>
+</canvas>
+<body>
+
+<fieldset>
+    <legend>Number</legend>
+    <label for="change">Choose a number:</label>
+    <select onchange="onchNumberCheck()" id="change" >
+        <option value="16" selected="selected">16</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="16">16</option>
+    </select>
+    <p id="numberOutput"></p>
+</fieldset>
+<p></p>
+
+<script type="text/javascript">
+
+
+
+
+    const cvs = document.getElementById("cvs");
+    const ctx = cvs.getContext("2d");
+
+   // const selectNumber = document.getElementById("selectNumber");
+    const numberOutput = document.getElementById("txtTask5Output");
+    let selectNumber = document.getElementById("change");
+
+    let points = [];
+    let numPt = 16;
+    draw();
+
+
+    function TPoint(aX = 0, aY = 0) {
+        this.x = aX;
+        this.y = aY;
+    }
+
+    function onchNumberCheck(){
+        numPt = selectNumber.value;
+        draw();
+    }
+
+
+function draw() {
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    const radius = 256;
+    let deltaDeg = 360 / numPt;
+
+    for (let i = 0; i < 360; i += deltaDeg) {
+        const v = i * Math.PI / 180;
+        points.push(
+            new TPoint(radius - radius * Math.cos(v), radius - radius * Math.sin(v))
+        );
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 0; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    points=[];
+}
+
+
+</script>
+</body>
+</html>
