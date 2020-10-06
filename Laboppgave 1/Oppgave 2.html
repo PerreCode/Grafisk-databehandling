@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strikk</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3; background-color: yellow;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    let Position = {x: 0, y: 0};
+
+    let posX = [];
+    let posY = [];
+    let click = false;
+
+    cMouseUp();
+
+    c.addEventListener("mousemove", function (e) {
+        Position.x = e.clientX;
+        Position.y = e.clientY;
+        if (Position.x < 100) {
+            Position.x = 100;
+        }
+        if (Position.x > 500) {
+            Position.x = 500;
+        }
+        if (Position.y < 100) {
+            Position.y = 100;
+        }
+        if (Position.y > 500) {
+            Position.y = 500;
+        }
+        posX.push(Position.x);
+        posY.push(Position.y);
+        if (Position.x > 300 && Position.x < 315 && Position.y > 300 && Position.y < 315 || click === true) {
+            c.style.cursor = "pointer";
+        } else {
+            c.style.cursor = "";
+        }
+        if (click === true) {
+            posX.reverse();
+            posY.reverse();
+            ctx.beginPath();
+            ctx.arc(posX[0], posY[0], 5, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(100, 300);
+            ctx.lineTo(posX[0], posY[0]);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(500, 300);
+            ctx.lineTo(posX[0], posY[0]);
+            ctx.stroke();
+            rubberLine();
+        }
+    });
+
+    function cMouseDown() {
+        if (c.style.cursor === "pointer") {
+            click = true;
+        }
+    }
+
+    function cMouseUp() {
+        draw();
+        startLine();
+        click = false;
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(0, 0, c.width, c.height);
+
+        ctx.beginPath();
+        ctx.rect(100, 100, 400, 400);
+        ctx.fillStyle = "red";
+        ctx.fill();
+    }
+
+    function startLine() {
+        ctx.beginPath();
+        ctx.moveTo(100, 300);
+        ctx.lineTo(500, 300);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(300, 300, 5, 0, 2 * Math.PI);
+        ctx.stroke();
+    }
+
+    function rubberLine() {
+        draw();
+        ctx.beginPath();
+        ctx.arc(posX[0], posY[0], 5, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(100, 300);
+        ctx.lineTo(posX[0], posY[0]);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(500, 300);
+        ctx.lineTo(posX[0], posY[0]);
+        ctx.stroke();
+    }
+
+    c.addEventListener("mousedown", cMouseDown);
+    c.addEventListener("mouseup", cMouseUp);
+
+</script>
+</body>
+</html>
