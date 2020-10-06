@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotasjon</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script type="text/javascript">
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+
+    // Manually rotating a point about the origin without matrices
+    let point = [500, 220];
+
+ /*   ctx.beginPath();
+    ctx.lineTo(point[0],point[1]);
+
+    // Calculate the distance from the origin
+    let distance = Math.sqrt(point[0] * point[0] + point[1] * point[1]);
+
+    // The equivalent of 60 degrees, in radians
+    let rotationInRadians = 0.02*Math.PI;
+
+    let transformedPoint = [
+        Math.cos(rotationInRadians) * distance,
+        Math.sin(rotationInRadians) * distance
+    ];
+    ctx.lineTo(transformedPoint[0],transformedPoint[1]);
+    ctx.stroke();
+
+  */
+
+    /////////
+    let sin = Math.sin;
+    let cos = Math.cos;
+
+    let a = Math.PI/3; //Rotation amount in radians
+
+    let R =  [
+        1,  cos(a),  -sin(a),     0,
+        0,  sin(a),   cos(a),     0,
+        0,       0,        0,     1
+    ];
+
+    let P = [220,233,1];
+    let newPointLOL = [0,0,1];
+
+    newPointLOL[0] += (R[0]*P[0]) + (R[3]*P[0]) + (R[6]*P[0]) + (R[9]*P[0]);
+    newPointLOL[1] += (R[1]*P[1]) + (R[4]*P[1]) + (R[7]*P[1]) + (R[10]*P[1]);
+    newPointLOL[2] += (R[2]*P[2]) + (R[5]*P[2]) + (R[8]*P[2]) + (R[11]*P[2]);
+
+    console.log(newPointLOL);
+    ctx.beginPath();
+    ctx.lineTo(P[0],P[1]);
+    ctx.lineTo(newPointLOL[0],newPointLOL[1]);
+    ctx.stroke();
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
