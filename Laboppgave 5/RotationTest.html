@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
+</canvas>
+<script>
+    window.onload = function() {
+        let c = document.getElementById("myCanvas");
+        let ctx = c.getContext("2d"),
+            width = c.width = window.innerWidth,
+            height = c.height = window.innerHeight,
+            point = {
+                x: 100,
+                y: 20
+            },
+            delta = 0.05;
+
+        ctx.translate(width / 2, height / 2);
+
+        update();
+
+        function update() {
+            ctx.clearRect(-width / 2, -height / 2, width, height);
+
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 20, 0, Math.PI * 2, false);
+            ctx.fill();
+
+            var cos = Math.cos(delta),
+                sin = Math.sin(delta),
+                x = point.x * cos - point.y * sin,
+                y = point.y * cos + point.x * sin;
+
+            point.x = x;
+            point.y = y;
+            console.log();
+
+            requestAnimationFrame(update);
+        }
+    };
+
+</script>
+
+</body>
+</html>
